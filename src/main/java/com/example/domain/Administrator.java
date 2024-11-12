@@ -1,5 +1,9 @@
 package com.example.domain;
 
+/**
+ * 管理者クラス.
+ * @author 細田智也
+ */
 public class Administrator {
     /* ID */
     private Integer id;

@@ -2,6 +2,10 @@ package com.example.domain;
 
 import java.util.Date;
 
+/**
+ * 従業員クラス.
+ * @author 細田智也
+ */
 public class Employee {
     /* ID */
     private Integer id;
