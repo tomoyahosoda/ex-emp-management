@@ -35,7 +35,7 @@ public class AdministratorRepository {
      * @param administrator 管理者情報
      */
     public void insert(Administrator administrator) {
-        String sql = "INSERT INTO administrator(name, mail_address, password) VALUES(:name, :mailAddress, :password)";
+        String sql = "INSERT INTO administrators(name, mail_address, password) VALUES(:name, :mailAddress, :password)";
         SqlParameterSource param = new MapSqlParameterSource().addValue("name", administrator.getName()).addValue("mailAddress", administrator.getMailAddress()).addValue("password", administrator.getPassword());
         template.update(sql, param);
     }
