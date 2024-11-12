@@ -26,10 +26,6 @@ public class AdministratorController {
      */
     @GetMapping("/toInsert")
     public String toInsert(InsertAdministratorForm form) {
-        Administrator administrator = new Administrator();
-        administrator.setName(form.getName());
-        administrator.setMailAddress(form.getMailAddress());
-        administrator.setPassword(form.getPassword());
         return "administrator/insert";
     }
 }
