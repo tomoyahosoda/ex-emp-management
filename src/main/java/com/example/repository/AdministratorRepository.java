@@ -11,10 +11,15 @@ import org.springframework.stereotype.Repository;
 
 import com.example.domain.Administrator;
 
+
+/**
+ * 管理者リポジトリ.
+ * @author 細田智也
+ */
 @Repository
 public class AdministratorRepository {
     @Autowired
-    NamedParameterJdbcTemplate template;
+    private NamedParameterJdbcTemplate template;
 
     private static final RowMapper<Administrator> ADMINISTRATOR_ROW_MAPPER = (rs, i) -> {
         Administrator administrator = new Administrator();
