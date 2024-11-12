@@ -34,13 +34,83 @@
       <!-- login form -->
       <div class="row">
         <div
-          class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
+        class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
         >
-          <!-- 背景をグレーに、埋め込んだようなコンポーネント -->
-          <div class="well">
-            <!-- ここから上を編集する必要はありません -->
+        <!-- 背景をグレーに、埋め込んだようなコンポーネント -->
+        <div class="well">
+          <!-- ここから上を編集する必要はありません -->
+          
+          
+          <!-- ここにモックのform要素を貼り付けます -->
+            <form method="post" action="login.html" th:action="@{/insert}" th:object="${insertAdministratorForm}">
+              <fieldset>
+                <legend>
+                  管理者登録<br />(システムにログインできる管理者を登録します)
+                </legend>
+                <!-- 氏名 -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label for="name"> 氏名: </label>
+                      <span th:errors="*{name}">エラー</span>
+                      <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        class="form-control"
+                        placeholder="山田太郎"
+                        th:field="*{name}"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- メールアドレス -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label for="mailAddress"> メールアドレス: </label>
+                      <span th:errors="*{mailAddress}">エラー</span>
+                      <input
+                        type="text"
+                        name="mailAddress"
+                        id="mailAddress"
+                        class="form-control"
+                        placeholder="yamada@mail.com"
+                        th:field="*{mailAddress}"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- パスワード -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label for="password"> パスワード: </label>
+                      <span th:errors="*{password}">エラー</span>
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="password"
+                        th:field="*{password}"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- 登録ボタン -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-primary">
+                        登録
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
 
-            <!-- ここにモックのform要素を貼り付けます -->
 
             <!-- ここから下を編集する必要はありません -->
           </div>
