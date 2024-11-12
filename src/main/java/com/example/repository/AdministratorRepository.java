@@ -31,7 +31,7 @@ public class AdministratorRepository {
     };
 
     /**
-     * 管理者情報をインサートする.
+     * 管理者情報を挿入する.
      * @param administrator 管理者情報
      */
     public void insert(Administrator administrator) {
