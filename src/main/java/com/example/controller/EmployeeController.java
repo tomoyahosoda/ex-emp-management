@@ -49,6 +49,11 @@ public class EmployeeController {
         return "employee/detail";
     }
 
+    /**
+     * 従業員情報を更新.
+     * @param form フォーム
+     * @return 従業員一覧へリダイレクト
+     */
     @PostMapping("/update")
     public String update(UpdateEmployeeForm form) {
         Employee employee = employeeService.showDetail(Integer.parseInt(form.getId()));
