@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Employee;
+import com.example.form.UpdateEmployeeForm;
 import com.example.service.EmployeeService;
 
 /**
@@ -24,12 +25,26 @@ public class EmployeeController {
     /**
      * 従業員一覧を表示.
      * @param model requestスコープ
-     * @return 従業員一覧
+     * @return 従業員一覧へフォワード
      */
     @GetMapping("/showList")
     public String showList(Model model) {
         List<Employee> employeeList = employeeService.showList();
         model.addAttribute("employeeList", employeeList);
         return "employee/list";
+    }
+
+    /**
+     * 従業員詳細を表示.
+     * @param id ID
+     * @param model requestスコープ
+     * @param form フォーム
+     * @return 従業員詳細へフォワード
+     */
+    @GetMapping("/showDetail")
+    public String showDetail(String id, Model model, UpdateEmployeeForm form) {
+        Employee employee = employeeService.showDetail(Integer.parseInt(id));
+        model.addAttribute("employee", employee);
+        return "employee/detail";
     }
 }
