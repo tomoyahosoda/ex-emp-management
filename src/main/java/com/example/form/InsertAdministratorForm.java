@@ -1,5 +1,6 @@
 package com.example.form;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 /**
@@ -12,6 +13,7 @@ public class InsertAdministratorForm {
     private String name;
     /* メールアドレス */
     @NotBlank(message = "メールアドレスの入力は必須です")
+    @Email(message = "メールアドレスの形式が不正です")
     private String mailAddress;
     /* パスワード */
     @NotBlank(message = "パスワードの入力は必須です")

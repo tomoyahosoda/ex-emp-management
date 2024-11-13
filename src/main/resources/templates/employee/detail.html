@@ -39,62 +39,66 @@
               <table class="table table-striped">
                 <tr>
                   <th nowrap>従業員名</th>
-                  <td>
-                    <span th:text="${employee.name}">山田花子</span>
+                  <td>  
+                    <input type="text" th:field="${employee.name}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>写真</th>
                   <td>
-                    <img th:src="${'/img/' + employee.image}">
+                    <img th:if="${employee.gender == '男性'}" th:src="@{/img/e1.png}">
+                    <img th:if="${employee.gender == '女性'}" th:src="@{/img/e2.png}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>性別</th>
                   <td>
-                    <span th:text="${employee.gender}">女性</span>
+                    <p th:text="${employee.gender}"></p>
+                    <input type="radio" name="gender" th:value="男性" th:text="男性">
+                    <input type="radio" name="gender" th:value="女性" th:text="女性">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>入社日</th>
                   <td>
+                    <input type="date" name="hireDate" th:value="${#dates.format(employee.hireDate, 'yyyy-MM-dd')}">
                     <span th:text="${#dates.format(employee.hireDate, 'yyyy-MM-dd')}">2012/11/29</span>
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>メールアドレス</th>
                   <td>
-                    <span th:text="${employee.mailAddress}">yamada@sample.com</span>
+                    <input type="text" th:field="${employee.mailAddress}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>郵便番号</th>
                   <td>
-                    <span th:text="${employee.zipCode}">111-1111</span>
+                    <input type="text" th:field="${employee.zipCode}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>住所</th>
                   <td>
-                    <span th:test="${employee.address}">東京都新宿区1-1-1</span>
+                    <input type="text" th:field="${employee.address}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>電話番号</th>
                   <td>
-                    <span th:text="${employee.telephone}">090-0000-0000</span>
+                    <input type="text" th:field="${employee.telephone}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>給料</th>
                   <td>
-                    <span th:text="${employee.salary}">400000円</span>
+                    <input type="text" th:field="${employee.salary}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>特性</th>
                   <td>
-                    <span th:text="${employee.characteristics}">明るく素直な性格です。リーダーシップを発揮します。新卒社員研修の時はグループ開発の時にリーダーを買ってでました。積極性も人間性も抜群です。周りに対する不満も聞いたことがありません。</span>
+                    <textarea th:field="${employee.characteristics}" cols="30" rows="10"></textarea>
                   </td>
                 </tr>
                 <tr>
@@ -102,7 +106,8 @@
                   <td>
                     <input type="hidden" name="id" th:value="${employee.id}" />
                     <span th:errors="*{dependentsCount}" style="color:red"></span>
-                    <input type="text" name="dependentsCount" id="dependentsCount" class="form-control" value="3" th:value="${employee.dependentsCount}" />
+                    <input type="text" name="dependentsCount" id="dependentsCount" class="form-control" value="3"
+                      th:value="${employee.dependentsCount}" />
                   </td>
                 </tr>
               </table>
