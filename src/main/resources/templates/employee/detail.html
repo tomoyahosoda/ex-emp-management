@@ -40,6 +40,7 @@
                 <tr>
                   <th nowrap>従業員名</th>
                   <td>  
+                    <p th:errors="*{name}" style="color:red"></p>
                     <input type="text" th:field="${employee.name}">
                   </td>
                 </tr>
@@ -53,6 +54,7 @@
                 <tr>
                   <th nowrap>性別</th>
                   <td>
+                    <p th:errors="*{gender}" style="color: red;"></p>
                     <p th:text="${employee.gender}"></p>
                     <input type="radio" th:value="男性" th:text="男性" th:field="${employee.gender}">
                     <input type="radio" th:value="女性" th:text="女性" th:field="${employee.gender}">
@@ -61,42 +63,49 @@
                 <tr>
                   <th nowrap>入社日</th>
                   <td>
+                    <p th:errors="*{hireDate}" style="color: red;"></p>
                     <input type="date" name="hireDate" th:value="${#dates.format(employee.hireDate, 'yyyy-MM-dd')}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>メールアドレス</th>
                   <td>
+                    <p th:errors="*{mailAddress}" style="color: red;"></p>
                     <input type="text" th:field="${employee.mailAddress}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>郵便番号</th>
                   <td>
+                    <p th:errors="*{zipCode}" style="color: red;"></p>
                     <input type="text" th:field="${employee.zipCode}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>住所</th>
                   <td>
+                    <p th:errors="*{address}" style="color: red;"></p>
                     <input type="text" th:field="${employee.address}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>電話番号</th>
                   <td>
+                    <p th:errors="*{telephone}" style="color: red;"></p>
                     <input type="text" th:field="${employee.telephone}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>給料</th>
                   <td>
+                    <p th:errors="*{salary}" style="color: red;"></p>
                     <input type="text" th:field="${employee.salary}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>特性</th>
                   <td>
+                    <p th:errors="*{characteristics}" style="color: red;"></p>
                     <textarea th:field="${employee.characteristics}" cols="30" rows="10"></textarea>
                   </td>
                 </tr>

@@ -1,6 +1,8 @@
 package com.example.form;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 /**
@@ -13,33 +15,43 @@ public class UpdateEmployeeForm {
     private String id;
 
     /* 名前 */
+    @NotBlank(message = "名前の入力は必須です")
     private String name;
 
     /* 画像 */
     private String image;
 
     /* 性別 */
+    @NotBlank(message = "性別は必須です")
     private String gender;
 
     /* 入社日 */
+    @NotBlank(message = "日付は必須です")
     private String hireDate;
 
     /* メールアドレス */
+    @NotBlank(message = "メールアドレスの入力は必須です")
+    @Email(message = "メールアドレスの形式が不正です")
     private String mailAddress;
 
     /* 郵便番号 */
+    @NotBlank(message = "郵便番号の入力は必須です")
     private String zipCode;
 
     /* 住所 */
+    @NotBlank(message = "住所の入力は必須です")
     private String address;
 
     /* 電話番号 */
+    @NotBlank(message = "電話番号の入力は必須です")
     private String telephone;
 
     /* 給料 */
+    @NotNull(message = "給料の入力は必須です")
     private Integer salary;
 
     /* 特性 */
+    @NotBlank(message = "特性の入力は必須です")
     private String characteristics;
 
     /* 扶養人数 */
