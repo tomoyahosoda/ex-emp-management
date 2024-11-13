@@ -1,5 +1,7 @@
 package com.example.form;
 
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * 従業員更新フォーム.
  * @author 細田智也
@@ -8,6 +10,7 @@ public class UpdateEmployeeForm {
     /* 従業員ID */
     private String id;
     /* 扶養人数 */
+    @NotBlank(message = "扶養人数を入力してください")
     private String dependentsCount;
     @Override
     public String toString() {
