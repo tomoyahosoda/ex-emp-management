@@ -54,15 +54,14 @@
                   <th nowrap>性別</th>
                   <td>
                     <p th:text="${employee.gender}"></p>
-                    <input type="radio" name="gender" th:value="男性" th:text="男性">
-                    <input type="radio" name="gender" th:value="女性" th:text="女性">
+                    <input type="radio" th:value="男性" th:text="男性" th:field="${employee.gender}">
+                    <input type="radio" th:value="女性" th:text="女性" th:field="${employee.gender}">
                   </td>
                 </tr>
                 <tr>
                   <th nowrap>入社日</th>
                   <td>
                     <input type="date" name="hireDate" th:value="${#dates.format(employee.hireDate, 'yyyy-MM-dd')}">
-                    <span th:text="${#dates.format(employee.hireDate, 'yyyy-MM-dd')}">2012/11/29</span>
                   </td>
                 </tr>
                 <tr>
