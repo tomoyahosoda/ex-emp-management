@@ -4,6 +4,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +46,10 @@ public class AdministratorController {
      * @return ログイン画面へリダイレクト
      */
     @PostMapping("/insert")
-    public String insert(InsertAdministratorForm form) {
+    public String insert(@Validated InsertAdministratorForm form, BindingResult result) {
+        if (result.hasErrors()) {
+            return "administrator/insert";
+        }
         Administrator administrator = new Administrator();
         BeanUtils.copyProperties(form, administrator);
         administratorService.insert(administrator);
@@ -68,7 +73,7 @@ public class AdministratorController {
      * @return
      */
     @PostMapping("/login")
-    public String login(LoginForm form, Model model) {
+    public String login(@Validated LoginForm form, BindingResult result, Model model) {
         Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
         if (administrator == null) {
             model.addAttribute("message", "メールアドレスまたはパスワードが不正です。");
@@ -78,6 +83,11 @@ public class AdministratorController {
         return "redirect:/employee/showList";
     }
 
+    /**
+     * ログアウト処理.
+     * @param form フォーム
+     * @return ログイン画面
+     */
     @GetMapping("/logout")
     public String logout(LoginForm form) {
         session.invalidate();
