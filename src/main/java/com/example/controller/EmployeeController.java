@@ -15,6 +15,8 @@ import com.example.domain.Employee;
 import com.example.form.UpdateEmployeeForm;
 import com.example.service.EmployeeService;
 
+import jakarta.servlet.http.HttpSession;
+
 /**
  * 従業員情報を操作するコントローラー.
  * @author 細田智也
@@ -24,6 +26,8 @@ import com.example.service.EmployeeService;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    HttpSession session;
 
     /**
      * 従業員一覧を表示.
@@ -46,6 +50,10 @@ public class EmployeeController {
      */
     @GetMapping("/showDetail")
     public String showDetail(String id, Model model, UpdateEmployeeForm form) {
+        if (session.getAttribute("administratorName") == null) {
+            model.addAttribute("message", "ログインが必要です");
+            return showList(model);
+        }
         Employee employee = employeeService.showDetail(Integer.parseInt(id));
         model.addAttribute("employee", employee);
         return "employee/detail";
