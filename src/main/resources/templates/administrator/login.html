@@ -23,14 +23,7 @@
   <body>
     <div class="container">
       <!-- 上余白 -->
-      <div class="row">
-        <div class="col-lg-offset-0 col-lg-6 col-md-8 col-sm-10 col-xs-12">
-          <img
-            src="../../static/img/header_logo.png"
-            th:src="@{/img/header_logo.png}"
-          />
-        </div>
-      </div>
+      <span th:insert="~{/administrator/fragment-part :: frag_header}"></span>
       <!-- login form -->
       <div class="row">
         <div
@@ -40,7 +33,46 @@
           <div class="well">
             <!-- ここから上を編集する必要はありません -->
 
-            <!-- ここにモックのform要素を貼り付けます -->
+            <form method="post" action="../employee/list.html" th:action="@{/login}" th:object="${loginForm}">
+              <fieldset>
+                <legend>ログイン</legend>
+                <div class="form-group">
+                  <div th:if="${message}" class="alert alert-danger">
+                    <p th:text="${message}"></p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="mailAddress">メールアドレス:</label>
+                  <input
+                    type="text"
+                    name="mailAddress"
+                    id="mailAddress"
+                    class="form-control"
+                    placeholder="Email"
+                    th:field="*{mailAddress}"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword">パスワード:</label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="inputPassword"
+                    class="form-control"
+                    placeholder="Password"
+                    th:field="*{password}"
+                  />
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">
+                    ログイン
+                  </button>
+                </div>
+                <div class="form-group">
+                  <a href="insert.html" th:href="@{/toInsert}">管理者登録はこちらから</a>
+                </div>
+              </fieldset>
+            </form>
 
             <!-- ここから下を編集する必要はありません -->
           </div>
