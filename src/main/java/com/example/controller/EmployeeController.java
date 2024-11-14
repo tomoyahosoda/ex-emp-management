@@ -8,12 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Employee;
 import com.example.form.UpdateEmployeeForm;
 import com.example.service.EmployeeService;
+import com.example.form.LoginForm;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,6 +31,11 @@ public class EmployeeController {
     @Autowired
     HttpSession session;
 
+    @ModelAttribute
+    public LoginForm setUpForm() {
+        return new LoginForm();
+    }
+
     /**
      * 従業員一覧を表示.
      * @param model requestスコープ
@@ -36,6 +43,10 @@ public class EmployeeController {
      */
     @GetMapping("/showList")
     public String showList(Model model) {
+        if (session.getAttribute("administratorName") == null) {
+            model.addAttribute("message", "ログインが必要です");
+            return "administrator/login";
+        }
         List<Employee> employeeList = employeeService.showList();
         model.addAttribute("employeeList", employeeList);
         return "employee/list";
@@ -52,7 +63,7 @@ public class EmployeeController {
     public String showDetail(String id, Model model, UpdateEmployeeForm form) {
         if (session.getAttribute("administratorName") == null) {
             model.addAttribute("message", "ログインが必要です");
-            return showList(model);
+            return "administrator/login";
         }
         Employee employee = employeeService.showDetail(Integer.parseInt(id));
         model.addAttribute("employee", employee);
