@@ -11,12 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Employee;
 import com.example.form.UpdateEmployeeForm;
 import com.example.service.EmployeeService;
+import com.example.form.LoginForm;
+
+import jakarta.servlet.http.HttpSession;
 
 /**
  * 従業員情報を操作するコントローラー.
@@ -27,6 +31,13 @@ import com.example.service.EmployeeService;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    HttpSession session;
+
+    @ModelAttribute
+    public LoginForm setUpForm() {
+        return new LoginForm();
+    }
 
     /**
      * 従業員一覧を表示.
@@ -35,6 +46,10 @@ public class EmployeeController {
      */
     @GetMapping("/showList")
     public String showList(Model model) {
+        if (session.getAttribute("administratorName") == null) {
+            model.addAttribute("message", "ログインが必要です");
+            return "administrator/login";
+        }
         List<Employee> employeeList = employeeService.showList();
         model.addAttribute("employeeList", employeeList);
         return "employee/list";
@@ -49,6 +64,10 @@ public class EmployeeController {
      */
     @GetMapping("/showDetail")
     public String showDetail(String id, Model model, UpdateEmployeeForm form) {
+        if (session.getAttribute("administratorName") == null) {
+            model.addAttribute("message", "ログインが必要です");
+            return "administrator/login";
+        }
         Employee employee = employeeService.showDetail(Integer.parseInt(id));
         model.addAttribute("employee", employee);
         return "employee/detail";
