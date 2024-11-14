@@ -75,6 +75,7 @@ public class EmployeeController {
             e.printStackTrace();
         }
         employee.setDependentsCount(Integer.parseInt(form.getDependentsCount()));
+        employee.setSalary(Integer.parseInt(form.getSalary()));
         employeeService.update(employee);
         return "redirect:/employee/showList";
     }

@@ -48,7 +48,8 @@ public class UpdateEmployeeForm {
 
     /* 給料 */
     @NotNull(message = "給料の入力は必須です")
-    private Integer salary;
+    @Pattern(regexp = "[0-9]+", message = "数字を入力してください")
+    private String salary;
 
     /* 特性 */
     @NotBlank(message = "特性の入力は必須です")
@@ -131,11 +132,11 @@ public class UpdateEmployeeForm {
         this.telephone = telephone;
     }
 
-    public Integer getSalary() {
+    public String getSalary() {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
+    public void setSalary(String salary) {
         this.salary = salary;
     }
 
