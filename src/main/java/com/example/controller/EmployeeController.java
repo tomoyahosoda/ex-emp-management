@@ -1,7 +1,10 @@
 package com.example.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,7 +65,17 @@ public class EmployeeController {
             return showDetail(form.getId(), model, form);
         }
         Employee employee = employeeService.showDetail(Integer.parseInt(form.getId()));
+        BeanUtils.copyProperties(form, employee);
+        String date = form.getHireDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date hireDate = dateFormat.parse(date);
+            employee.setHireDate(hireDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         employee.setDependentsCount(Integer.parseInt(form.getDependentsCount()));
+        employee.setSalary(Integer.parseInt(form.getSalary()));
         employeeService.update(employee);
         return "redirect:/employee/showList";
     }
